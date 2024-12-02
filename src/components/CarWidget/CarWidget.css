@@ -1,0 +1,18 @@
+.iconoCarrito{
+    position: relative;
+    margin: 1vh 0 0 0;
+}
+
+.contador{
+    background-color: #4648C9;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.20vw 0.50vw;
+    border-radius: 50%;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    transform: translate(50%,-50%);
+    font-size: 0.75vw;
+}

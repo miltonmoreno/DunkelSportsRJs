@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+}
+
+nav {
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    height: 7.5vh;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.categorias {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    width: 45%;
+    justify-content: center;
+    gap: 5vw;
+    align-items: center;
+    font-family: inherit;
+}
+
+
+.categoria {
+    color: white;
+    font-family: "Montserrat", sans-serif;
+}
+
+.categoria:hover {
+    color: #4648C9;
+}
+
+.divLogo {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+}
+
+.logo {
+    width: 20%;
+}
