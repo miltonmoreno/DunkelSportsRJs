@@ -1,1 +1,31 @@
+* {
+    font-family: "Montserrat", sans-serif;
+}
 
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 400px;
+    gap: 7px;
+    border: 2px solid black;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+}
+
+.card img{
+    height: 70%;
+    width: 70%;
+    object-fit: contain;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 10px;
+}

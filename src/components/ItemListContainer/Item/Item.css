@@ -1,0 +1,12 @@
+.precio{
+    font-weight: 900;
+}
+
+.botonVerMas{
+    background-color:#4648C9;
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+}

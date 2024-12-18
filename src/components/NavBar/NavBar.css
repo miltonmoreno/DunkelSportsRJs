@@ -12,6 +12,16 @@ nav {
     width: 100%;
 }
 
+.category {
+    text-decoration: none;
+    color: white;
+}
+
+.category-active {
+    text-decoration: none;
+    color: #4648C9;
+}
+
 .categorias {
     display: flex;
     flex-direction: row;

@@ -1,0 +1,40 @@
+.itemDetail{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 5%;
+}
+
+.textoDetalle{
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.tituloDetalle{
+    font-size: 3vw;
+}
+
+.descripcionDetalle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.precioDetalle{
+    font-weight: 900;
+}
+
+.imagenProducto{
+    width: 40%;
+}
+
+.imagenProducto img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
