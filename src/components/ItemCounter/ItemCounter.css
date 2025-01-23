@@ -1,0 +1,16 @@
+button {
+    background-color:#4648C9;
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.editarContador{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75vw;
+}

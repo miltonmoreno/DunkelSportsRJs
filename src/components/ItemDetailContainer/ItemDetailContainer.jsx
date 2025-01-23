@@ -1,39 +1,51 @@
 import { useEffect, useState } from "react"
 import ItemDetail from "./ItemDetail"
-import { getProductos } from "../../data/data.js"
 import { useParams } from "react-router-dom"
 import "./ItemDetailContainer.css"
 import Loading from "../Loading/Loading.jsx"
+import db from "../../db/db.js"
+import { collection, getDocs } from "firebase/firestore"
+import PaginaError from "../PaginaError/PaginaError.jsx"
 
 const ItemDetailContainer = () => {
 
-    const [producto, setProducto] = useState([])
+    const [producto, setProducto] = useState(null)
+
+    const [loading, setLoading] = useState (true)
 
     const {idProducto} = useParams()
 
-    const [cargando, setCargando] = useState(false)
+    const nombreColeccion = collection(db, "productosDunkel")
+    const getProductos =  async () => {
+        setLoading(true)
+        try {
+            const dataDb = await getDocs(nombreColeccion)
+            const data = dataDb.docs.map((producto) => { return ({id: producto.id, ...producto.data()})})
+            const findProduct = data.find((producto) => producto.id === idProducto)
+
+            setProducto(findProduct)
+        } catch (error){
+            console.log (error)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     useEffect(()=>{
-        setCargando(true)
         getProductos()
-            .then((data) => {
-                const encontrarProducto = data.find((productoEncontrado)=> productoEncontrado.id === idProducto)
-                setProducto(encontrarProducto)
-            })
-            .finally(()=> {
-                setCargando(false)
-            })
-    }, [])
+    }, [idProducto])
 
     return (
         <div>
-            {
-            cargando === true ? (
+        {
+            loading === true ? (
                 <Loading/>
-            ): (
+            ) : producto ? (
                 <ItemDetail producto={producto}/>
+            ) : (
+                <PaginaError/>
             )
-            }
+        }
         </div>
     )
 }

@@ -1,0 +1,14 @@
+.iconoError{
+    width: 20%;
+    height: 30%;
+}
+
+.errorContainer {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30vh;
+    gap: 2vh;
+}

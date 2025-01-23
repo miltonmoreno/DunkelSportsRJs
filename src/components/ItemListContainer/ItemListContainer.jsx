@@ -1,43 +1,64 @@
 import { useState, useEffect } from "react"
-import { getProductos } from "../../data/data"
 import ItemList from "./ItemList/ItemList"
 import "./ItemListContainer.css"
-import useProductos from "../../hooks/useProductos"
-import {PropagateLoader} from "react-spinners"
 import { useParams } from "react-router-dom"
+import { collection, getDocs, query, where } from "firebase/firestore"
+import db from "../../db/db"
 import Loading from "../Loading/Loading"
 
 const ItemListContainer = () => {
+
+    const [loading, setLoading] = useState(true)
 
     const {idCategory} = useParams()
 
     const [productos, setProductos] = useState ([])
 
-    const [cargando, setCargando] = useState(false)
+    const nombreColeccion = collection(db, "productosDunkel")
+    const getProductos =  async () => {
+
+        setLoading(true)
+        try {
+            const dataDb = await getDocs(nombreColeccion)
+            const data = dataDb.docs.map((producto) => { return ({id: producto.id, ...producto.data()})})
+
+            setProductos(data)
+        } catch (error){
+            console.log (error)
+        } finally {
+            setLoading(false)
+        }
+
+    }
+
+    const getProductosByCategoria = async() => {
+        setLoading(true)
+        try {
+            const q = query(nombreColeccion, where("categoria", "==", idCategory) )
+            const dataDb = await getDocs(q)
+            const data = dataDb.docs.map((producto) => { return ({id: producto.id, ...producto.data()})})
+            setProductos(data)
+        }catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     useEffect(()=>{
-        setCargando(true)
-        getProductos()
-            .then((data) => {
-                if(idCategory){
-                    const productosFiltrados = data.filter((producto) => producto.categoria === idCategory)
-                    setProductos(productosFiltrados)
-                } else {
-                    setProductos(data)
-                }
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-            .finally(()=> {
-                setCargando(false)
-            })
+
+        if (idCategory) {
+            getProductosByCategoria()
+        } else {
+            getProductos()
+        }
+        
     }, [idCategory])
 
     return(
         <div className="container">
             {
-                cargando === true ? (
+                loading === true ? (
                     <Loading/>
                 ): (
                     <ItemList productos={productos} />
